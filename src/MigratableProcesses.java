@@ -2,6 +2,10 @@ import java.util.ArrayList;
 
 public abstract class MigratableProcesses implements java.lang.Runnable,
 		java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<String> arguments;
 
 	public MigratableProcesses() {

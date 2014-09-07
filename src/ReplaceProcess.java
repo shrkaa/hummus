@@ -1,7 +1,14 @@
 
 public class ReplaceProcess extends MigratableProcesses {
+	
+	public ReplaceProcess(int value) {
+		super(value);
+	}
+
 	// TransactionalFileInputStream in
 	
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -16,8 +23,8 @@ public class ReplaceProcess extends MigratableProcesses {
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "ReplaceProcess:Instance Value:" + this.getInstanceValue()
+				+ ":Arguments:" + this.getArguments();
 	}
 	
 }

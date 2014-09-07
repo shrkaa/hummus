@@ -7,8 +7,11 @@ public abstract class MigratableProcesses implements java.lang.Runnable,
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<String> arguments;
+	private int instanceValue;
+	private int signal;
 
-	public MigratableProcesses() {
+	public MigratableProcesses(int value) {
+		this.instanceValue = value;
 		arguments = new ArrayList<String>();
 	}
 
@@ -26,9 +29,17 @@ public abstract class MigratableProcesses implements java.lang.Runnable,
 	@Override
 	public abstract String toString();
 	
+	public int getSignal() {
+		return signal;
+	}
 	
 	public ArrayList<String> getArguments()
 	{
 		return arguments;
+	}
+	
+	public int getInstanceValue()
+	{
+		return instanceValue;
 	}
 }

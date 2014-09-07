@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
-public abstract class MigratableProcesses implements java.lang.Runnable,
-		java.io.Serializable {
+public abstract class MigratableProcesses implements java.io.Serializable, java.lang.Runnable
+		 {
 	/**
 	 * 
 	 */
@@ -10,9 +10,9 @@ public abstract class MigratableProcesses implements java.lang.Runnable,
 	private int instanceValue;
 	private int signal;
 
-	public MigratableProcesses(int value) {
+	public MigratableProcesses(int value, ArrayList<String> args ) throws Exception {
 		this.instanceValue = value;
-		arguments = new ArrayList<String>();
+		arguments = args;
 	}
 
 	/**

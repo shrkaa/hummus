@@ -13,6 +13,7 @@ public class ReplaceProcess extends MigratableProcesses {
 	private TransactionalFileOutputStream outFile;
 	private String findString;
 	private String replaceString;
+	
 	public ReplaceProcess(int value, ArrayList<String> args) throws Exception{
 		super(value, args);
 		if (args.size() != 4) {

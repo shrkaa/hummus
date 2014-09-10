@@ -59,8 +59,10 @@ public class ProcessManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
+	}
+	
+	public void removeProcess(){
+		
 	}
 
 }

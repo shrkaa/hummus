@@ -1,7 +1,9 @@
+package edu.cmu.cs.cs440.hw1;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
 
+//HAVE TO CHECK IF IT IS MIGRATED!!!
 public class TransactionalFileInputStream extends java.io.InputStream implements
 		Serializable {
 
@@ -9,25 +11,37 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 	private String filename;
 	private long seekTo;
 	private RandomAccessFile raf;
+	private boolean isMigrated;
 
 	public TransactionalFileInputStream(String file) {
 		filename = file;
 		seekTo = 0;
+		isMigrated = false;
 	}
 
 	@Override
 	public int read() throws IOException {
-		raf = new RandomAccessFile(filename, "r");
-		raf.seek(seekTo);
+		if(raf == null || isMigrated == true)
+		{
+			raf = new RandomAccessFile(filename, "r");
+			raf.seek(seekTo);
+		}
 		int bytes = raf.read();
 		seekTo = seekTo + 1;
 		return bytes;
 	}
 	
-	//** MAKE SURE TO CLOSE RANDOMACCESSFILE!!!!!!
-	public RandomAccessFile getRandomAccessFile()
+	public void close() throws IOException
 	{
-		return raf;
+	  super.close();
+	  if(raf != null)
+		  raf.close();
 	}
+	
+	public void setMigrated(boolean flag)
+	{
+		isMigrated = flag;
+	}
+	
 
 }

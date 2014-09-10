@@ -1,39 +1,54 @@
+package edu.cmu.cs.cs440.hw1;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.lang.InterruptedException;
+
 import com.sun.xml.internal.rngom.parse.compact.EOFException;
 
-public class ReverseLine extends MigratableProcesses {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class ReplaceProcess extends MigratableProcess {
+	
+	private static final long serialVersionUID1 = 1L;
 	private TransactionalFileInputStream inFile;
 	private TransactionalFileOutputStream outFile;
-
-	public ReverseLine(int value, ArrayList<String> args) throws Exception {
+	private String findString;
+	private String replaceString;
+	
+	public ReplaceProcess(int value, ArrayList<String> args) throws Exception{
 		super(value, args);
-		if (args.size() != 2) {
-			System.out.println("Usage: ReverseLine <InputFile> <OutputFile>");
+		if (args.size() != 4) {
+			System.out.println("Usage: ReverseLine <InputFile> <OutputFile> <FindString> <ReplaceString>");
 			throw new Exception("Invalid Arguments");
 		}
 		inFile = new TransactionalFileInputStream(args.get(0));
 		outFile = new TransactionalFileOutputStream(args.get(1));
+		findString = args.get(2);
+		replaceString = args.get(3);
+		
 	}
+
+	// TransactionalFileInputStream in
+	
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void run() {
 		PrintStream out = new PrintStream(outFile);
 		DataInputStream in = new DataInputStream(inFile);
 		try {
-			while (getSignal() == 0) {
+			while (!isSuspended()) {
 				String line = in.readLine();
+				String [] words = line.split(" ");
 				String output = "";
-				for (int x = line.length(); x >= 0; x--) {
-					output += line.charAt(x);
+				for (int x = 0; x < words.length; x++) {
+					if(words[x].equals(findString))
+					{
+						output += replaceString + " ";
+					}
+					
+					else
+						output += words[x]+ " ";
 				}
 				out.println(output);
 			}
@@ -43,21 +58,14 @@ public class ReverseLine extends MigratableProcesses {
 		} catch (IOException e) {
 			System.out.println("ReverseLineProcess Error:" + e);
 		}
+		
 	}
 
-	@Override
-	public void suspend() {
-		while (true) {
-			if (this.getSignal() != 0) {
-				break;
-			}
-		}
-	}
 
 	@Override
 	public String toString() {
-		return "ReverseLine:Instance Value:" + this.getInstanceValue()
+		return "ReplaceProcess:Instance Value:" + this.getProcessID()
 				+ ":Arguments:" + this.getArguments();
 	}
-
+	
 }

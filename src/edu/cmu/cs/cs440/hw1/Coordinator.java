@@ -44,14 +44,39 @@ public class Coordinator {
     	{
     		start(args);
     	}
-    	
-    	
-    	
+    	else if (command.equals("MIGRATE"))
+    	{
+    		migrate();
+    	}
+    	else if (command.equals("REMOVE"))
+    	{
+    		remove();
+    	}
     }
     
-    public void help()
+    private void remove() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void migrate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void help()
     {
-    	
+    	System.out.println("How to run \"Migratable Processes\" on the Command Line:");
+    	System.out.println();
+    	System.out.println("start <process-name>: Starts a new process of type \"processname\"");
+    	System.out.println();
+    	System.out.println("migrate <process-name> <destination-hostname>: Migrates the specified process to a new node with the given hostname");
+    	System.out.println();
+    	System.out.println("remove <process-name>: Removes the specified process from the current node");
+    	System.out.println();
+    	System.out.println("print: Prints all the processes currently running on your node");
+    	System.out.println();
+    	System.out.println("exit: Exits the program");
     }
     
     public void exit()

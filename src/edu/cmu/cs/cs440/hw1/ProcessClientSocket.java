@@ -18,7 +18,6 @@ public class ProcessClientSocket implements Runnable {
 	@Override
 	public void run() {
 		ObjectInputStream in;
-		ObjectOutputStream out;
 		try {
 			in = new ObjectInputStream(client.getInputStream());
 			MigratableProcess process = (MigratableProcess) in.readObject();

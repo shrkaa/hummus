@@ -1,11 +1,12 @@
 package edu.cmu.cs.cs440.hw1;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.lang.InterruptedException;
-import com.sun.xml.internal.rngom.parse.compact.EOFException;
+
 
 /**
  * 

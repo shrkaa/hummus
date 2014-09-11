@@ -29,14 +29,6 @@ public abstract class MigratableProcess implements java.lang.Runnable,
 		isDone = false;
 	}
 
-	/**
-	 * Called before an object is serialized to allow the process to enter a
-	 * known safe state
-	 */
-	public void suspend()
-	{
-		while(suspendedSignal);
-	}
 
 	/**
 	 * This method produces a symbol string representation of the object by

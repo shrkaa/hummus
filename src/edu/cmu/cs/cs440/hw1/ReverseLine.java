@@ -55,8 +55,7 @@ public class ReverseLine extends MigratableProcess {
 		DataInputStream in = new DataInputStream(inFile);
 		String line;
 		try {
-			while (!isSuspended() || isDone()) {
-				while ((line = in.readLine()) != null) {
+			while (((line = in.readLine()) != null) && !isSuspended() && !isDone() ){
 					String output = "";
 					for (int x = line.length() - 1; x >= 0; x--) {
 						output += line.charAt(x);
@@ -67,10 +66,9 @@ public class ReverseLine extends MigratableProcess {
 							// Ignore it
 						}
 					}
-					out.println(output);
-				}
-				setDone(true);
+				out.println(output);
 			}
+			setDone(true);
 			in.close();
 			out.close();
 		} catch (EOFException e) {

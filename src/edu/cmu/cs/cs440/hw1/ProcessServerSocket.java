@@ -9,7 +9,7 @@ public class ProcessServerSocket implements Runnable {
 
 	private ServerSocket server;
 	private ProcessManager manager;
-	public static final int PORT = 123;
+	public static final int PORT = 1234;
 	int isAlive;
 
 	/**
@@ -43,7 +43,7 @@ public class ProcessServerSocket implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    new Thread(new ProcessClientSocket(clientSocket,manager)).start();
+	    new Thread(new ProcessRecieverSocket(clientSocket,manager)).start();
 		
 	}
 

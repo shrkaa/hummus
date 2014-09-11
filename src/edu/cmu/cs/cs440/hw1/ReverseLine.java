@@ -1,4 +1,5 @@
 package edu.cmu.cs.cs440.hw1;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -29,23 +30,23 @@ public class ReverseLine extends MigratableProcess {
 	public void run() {
 		PrintStream out = new PrintStream(outFile);
 		DataInputStream in = new DataInputStream(inFile);
+		String line;
 		try {
 			while (!isSuspended()) {
-				String line = in.readLine();
+				while((line = in.readLine()) != null){
 				String output = "";
-				for (int x = line.length(); x >= 0; x--) {
+				for (int x = line.length() -1; x >= 0; x--) {
 					output += line.charAt(x);
 				}
 				out.println(output);
 			}
-
+			}
 		} catch (EOFException e) {
 			// Put something in here
 		} catch (IOException e) {
 			System.out.println("ReverseLineProcess Error:" + e);
 		}
 	}
-
 
 	@Override
 	public String toString() {

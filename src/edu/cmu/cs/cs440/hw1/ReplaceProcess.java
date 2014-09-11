@@ -64,7 +64,7 @@ public class ReplaceProcess extends MigratableProcess {
 
 	@Override
 	public String toString() {
-		return "ReplaceProcess:Instance Value:" + this.getProcessID()
+		return "ReplaceStringProcess:Instance Value:" + this.getProcessID()
 				+ ":Arguments:" + this.getArguments();
 	}
 	

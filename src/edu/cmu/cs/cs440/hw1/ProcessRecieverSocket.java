@@ -5,17 +5,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class ProcessClientSocket implements Runnable {
+public class ProcessRecieverSocket implements Runnable {
 
 	private Socket client;
 	private ProcessManager manager;
 
-	public ProcessClientSocket(Socket clientSocket, ProcessManager manager) {
+	public ProcessRecieverSocket(Socket clientSocket, ProcessManager manager) {
 		client = clientSocket;
 		this.manager = manager;
 	}
 
 	@Override
+	
 	public void run() {
 		ObjectInputStream in;
 		try {

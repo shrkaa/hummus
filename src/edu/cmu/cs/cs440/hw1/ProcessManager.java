@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class ProcessManager {
 
-	int idCounter;
-	ArrayList<MigratableProcess> processes;
+	private int idCounter;
+	private ArrayList<MigratableProcess> processes;
 
 	public ProcessManager() {
 		idCounter = 0;
@@ -61,6 +61,21 @@ public class ProcessManager {
 		}
 	}
 	
+	public ArrayList<MigratableProcess> getProcesses()
+	{
+		return processes;
+	}
+	public MigratableProcess findProcess(int id)
+	{
+		for(int x = 0; x <processes.size(); x++)
+		{
+			MigratableProcess process = processes.get(x);
+			if(process.getProcessID() == id)
+				return process;
+		}
+		
+		return null;
+	}
 	public void removeProcess(){
 		
 	}

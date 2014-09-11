@@ -69,6 +69,8 @@ public class ReverseLine extends MigratableProcess {
 				out.println(output);
 			}
 			setDone(true);
+			System.out.println(isSuspended());
+			System.out.println("I am done!!!! :D");
 			in.close();
 			out.close();
 		} catch (EOFException e) {

@@ -78,6 +78,12 @@ public class ReplaceProcess extends MigratableProcess {
 
 						else
 							output += words[x] + " ";
+						
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							// Ignore it
+						}
 					}
 					out.println(output);
 				}
@@ -85,11 +91,7 @@ public class ReplaceProcess extends MigratableProcess {
 			in.close();
 			out.close();
 			/* Make this program longer so we can observe it */
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// Ignore it
-			}
+
 			setDone(true);
 
 		} catch (EOFException e) {

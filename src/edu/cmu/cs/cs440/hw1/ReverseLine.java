@@ -61,18 +61,18 @@ public class ReverseLine extends MigratableProcess {
 					String output = "";
 					for (int x = line.length() - 1; x >= 0; x--) {
 						output += line.charAt(x);
+						/* Make this program longer so we can observe it */
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							// Ignore it
+						
 					}
 					out.println(output);
 				}
 			}
 			in.close();
-			out.close();
-			/* Make this program longer so we can observe it */
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// Ignore it
-			}
+			out.close();}
 			setDone(true);
 		} catch (EOFException e) {
 			// Put something in here

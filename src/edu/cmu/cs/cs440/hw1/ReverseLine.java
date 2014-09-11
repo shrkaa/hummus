@@ -61,7 +61,7 @@ public class ReverseLine extends MigratableProcess {
 						output += line.charAt(x);
 						/* Make this program longer so we can observe it */
 						try {
-							Thread.sleep(100);
+							Thread.sleep(1000);
 						} catch (InterruptedException e) {
 							// Ignore it
 						}

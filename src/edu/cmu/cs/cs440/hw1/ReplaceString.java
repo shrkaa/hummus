@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *         outputfile.
  * 
  */
-public class ReplaceProcess extends MigratableProcess {
+public class ReplaceString extends MigratableProcess {
 
 	private static final long serialVersionUID1 = 1L;
 	private TransactionalFileInputStream inFile;
@@ -29,7 +29,7 @@ public class ReplaceProcess extends MigratableProcess {
 	private String replaceString;
 
 	/**
-	 * Constructor that create a new ReplaceProcess.
+	 * Constructor that create a new ReplaceString.
 	 * 
 	 * @param value
 	 *            - processID
@@ -38,15 +38,15 @@ public class ReplaceProcess extends MigratableProcess {
 	 *            file, arg(2) - findString, arg(3) - replaceString
 	 * @throws Exception
 	 */
-	public ReplaceProcess(int value, ArrayList<String> args) throws Exception {
+	public ReplaceString(int value, ArrayList<String> args) throws Exception {
 		super(value, args);
 		if (args.size() != 4) {
 			System.out
 					.println("Usage: ReverseLine <InputFile> <OutputFile> <FindString> <ReplaceString>");
 			throw new Exception("Invalid Arguments");
 		} else {
-			inFile = new TransactionalFileInputStream(args.get(0));
-			outFile = new TransactionalFileOutputStream(args.get(1));
+			inFile = new TransactionalFileInputStream(args.get(0), this);
+			outFile = new TransactionalFileOutputStream(args.get(1), this);
 			findString = args.get(2);
 			replaceString = args.get(3);
 		}
@@ -66,8 +66,7 @@ public class ReplaceProcess extends MigratableProcess {
 		DataInputStream in = new DataInputStream(inFile);
 		String line;
 		try {
-			while (!isSuspended()) {
-				while ((line = in.readLine()) != null) {
+			while ((line = in.readLine()) != null && !isSuspended()) {
 					String[] words = line.split(" ");
 					String output = "";
 					for (int x = 0; x < words.length; x++) {
@@ -80,15 +79,14 @@ public class ReplaceProcess extends MigratableProcess {
 
 						/* Make this program longer so we can observe it */
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							System.out.println("I got interupted!");
 						}
 					}
 					out.println(output);
-				}
-				setDone(true);
 			}
+			setDone(true);
 			in.close();
 			out.close();
 		} catch (EOFException e) {

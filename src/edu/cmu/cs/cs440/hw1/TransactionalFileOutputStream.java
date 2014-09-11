@@ -10,17 +10,17 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 	private String filename;
 	private long seekTo;
 	private transient RandomAccessFile raf;
-	private boolean isMigrated;
+	private MigratableProcess process;
 	
     /**
      * Constrctor that creates a TransactionalFileOutputStream
      * given the output file.
      * @param file - file to write output into
      */
-	public TransactionalFileOutputStream(String file) {
+	public TransactionalFileOutputStream(String file, MigratableProcess process) {
 		filename = file;
 		seekTo = 0;
-		isMigrated = false;
+		this.process = process;
 	}
 
 	/** 
@@ -28,7 +28,7 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 	 */
 	@Override
 	public void write(int arg) throws IOException {
-		if(raf == null || isMigrated)
+		if(raf == null || process.isMigrated())
 		{
 			raf = new RandomAccessFile(filename, "rw");
 			raf.seek(seekTo);
@@ -45,10 +45,5 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 		  raf.close();
 	}
 	
-	/** Indicated if the file has been migrated */
-	public void setMigrated(boolean flag)
-	{
-		isMigrated = flag;
-	}
 
 }

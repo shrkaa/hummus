@@ -41,8 +41,8 @@ public class ReverseLine extends MigratableProcess {
 			System.out.println("Usage: ReverseLine <InputFile> <OutputFile>");
 			throw new Exception("Invalid Arguments");
 		}
-		inFile = new TransactionalFileInputStream(args.get(0));
-		outFile = new TransactionalFileOutputStream(args.get(1));
+		inFile = new TransactionalFileInputStream(args.get(0),this);
+		outFile = new TransactionalFileOutputStream(args.get(1), this);
 	}
 
 	/**
@@ -55,13 +55,13 @@ public class ReverseLine extends MigratableProcess {
 		DataInputStream in = new DataInputStream(inFile);
 		String line;
 		try {
-			while (((line = in.readLine()) != null) && !isSuspended() && !isDone() ){
+			while (((line = in.readLine()) != null) && !isSuspended()){
 					String output = "";
 					for (int x = line.length() - 1; x >= 0; x--) {
 						output += line.charAt(x);
 						/* Make this program longer so we can observe it */
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							// Ignore it
 						}

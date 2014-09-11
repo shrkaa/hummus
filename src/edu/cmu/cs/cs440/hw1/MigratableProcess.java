@@ -16,6 +16,7 @@ public abstract class MigratableProcess implements java.lang.Runnable,
 	private int processID;
 	private boolean suspendedSignal;
 	private boolean isDone;
+	private boolean isMigrated;
     /**
      * Constructor that creates a MigratableProcess
      * @param value - processID
@@ -27,6 +28,7 @@ public abstract class MigratableProcess implements java.lang.Runnable,
 		arguments = args;
 		suspendedSignal = false;
 		isDone = false;
+		isMigrated = false;
 	}
 
 
@@ -72,5 +74,15 @@ public abstract class MigratableProcess implements java.lang.Runnable,
 	public void setDone(boolean flag)
 	{
 		isDone = flag;
+	}
+	
+	public boolean isMigrated()
+	{
+		return isMigrated;
+	}
+	
+	public void setMigrated(boolean flag)
+	{
+		isMigrated = flag;
 	}
 }

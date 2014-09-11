@@ -11,12 +11,12 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 	private String filename;
 	private long seekTo;
 	private transient RandomAccessFile raf;
-	private boolean isMigrated;
+	private MigratableProcess process;
 
-	public TransactionalFileInputStream(String file) {
+	public TransactionalFileInputStream(String file, MigratableProcess process) {
 		filename = file;
 		seekTo = 0;
-		isMigrated = false;
+		this.process = process;
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 	 */
 	@Override
 	public int read() throws IOException {
-		if(raf == null || isMigrated == true)
+		if(raf == null || process.isMigrated())
 		{
 			raf = new RandomAccessFile(filename, "r");
 			raf.seek(seekTo);
@@ -43,11 +43,7 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 		  raf.close();
 	}
 	
-	/** Sets if the file has been migrated */
-	public void setMigrated(boolean flag)
-	{
-		isMigrated = flag;
-	}
+
 	
 
 }

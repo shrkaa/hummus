@@ -74,7 +74,9 @@ public class ProcessManager {
 	public void migrateProcess(MigratableProcess process, String hostname) {
 		ObjectOutputStream out;
 		Socket socket;
+		process.setDone(true);
 		process.setSuspend(true);
+		process.setMigrated(true);
 		try {
 			socket = new Socket(hostname, ProcessServerSocket.PORT);
 			out = new ObjectOutputStream(socket.getOutputStream());

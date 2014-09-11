@@ -7,7 +7,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.lang.InterruptedException;
 
-
 /**
  * 
  * @author Shri Karthikeyan and Nandini Ramakrishnan This is one of our examples
@@ -57,8 +56,8 @@ public class ReverseLine extends MigratableProcess {
 		String line;
 		try {
 			while (!isSuspended() || isDone()) {
+				String output = "";
 				while ((line = in.readLine()) != null) {
-					String output = "";
 					for (int x = line.length() - 1; x >= 0; x--) {
 						output += line.charAt(x);
 						/* Make this program longer so we can observe it */
@@ -66,19 +65,20 @@ public class ReverseLine extends MigratableProcess {
 							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							// Ignore it
-						
+						}
 					}
 					out.println(output);
 				}
+				setDone(true);
 			}
 			in.close();
-			out.close();}
-			setDone(true);
+			out.close();
 		} catch (EOFException e) {
 			// Put something in here
 		} catch (IOException e) {
 			System.out.println("ReverseLineProcess Error:" + e);
 		}
+
 	}
 
 	/**

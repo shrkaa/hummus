@@ -100,7 +100,6 @@ public class ProcessManager {
 		for (int x = 0; x < processes.size(); x++) {
 			if (processes.get(x).isDone())
 				processes.remove(x);
-			processes.remove(x);
 		}
 
 		return processes;

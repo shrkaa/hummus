@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-
 /**
  * 
  * @author Shri Karthikeyan and Nandini Ramakrishnan
@@ -78,21 +77,21 @@ public class ReplaceProcess extends MigratableProcess {
 
 						else
 							output += words[x] + " ";
-						
+
+						/* Make this program longer so we can observe it */
 						try {
-							Thread.sleep(5000);
+							Thread.sleep(10);
 						} catch (InterruptedException e) {
-							// Ignore it
+							System.out.println("I got interupted!");
 						}
 					}
 					out.println(output);
 				}
+				setDone(true);
 			}
 			in.close();
 			out.close();
-			/* Make this program longer so we can observe it */
-
-			setDone(true);
+			
 
 		} catch (EOFException e) {
 			// Put something in here

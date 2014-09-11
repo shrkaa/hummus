@@ -56,8 +56,8 @@ public class ReverseLine extends MigratableProcess {
 		String line;
 		try {
 			while (!isSuspended() || isDone()) {
-				String output = "";
 				while ((line = in.readLine()) != null) {
+					String output = "";
 					for (int x = line.length() - 1; x >= 0; x--) {
 						output += line.charAt(x);
 						/* Make this program longer so we can observe it */

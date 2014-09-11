@@ -75,6 +75,7 @@ public class ProcessManager {
 		ObjectOutputStream out;
 		Socket socket;
 		process.setSuspend(true);
+		process.suspend();
 		try {
 			socket = new Socket(hostname, ProcessServerSocket.PORT);
 			out = new ObjectOutputStream(socket.getOutputStream());

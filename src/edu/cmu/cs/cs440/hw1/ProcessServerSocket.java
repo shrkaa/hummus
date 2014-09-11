@@ -43,6 +43,7 @@ public class ProcessServerSocket implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	    System.out.println("There is a connection trying to be made");
 	    new Thread(new ProcessRecieverSocket(clientSocket,manager)).start();
 		
 	}

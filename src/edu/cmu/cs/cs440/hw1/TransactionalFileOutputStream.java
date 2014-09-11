@@ -9,7 +9,7 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 	private static final long serialVersionUID = 1L;
 	private String filename;
 	private long seekTo;
-	private RandomAccessFile raf;
+	private transient RandomAccessFile raf;
 	private boolean isMigrated;
 	
     /**

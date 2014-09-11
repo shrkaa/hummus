@@ -40,8 +40,10 @@ public class ProcessRecieverSocket implements Runnable {
 	public void run() {
 		ObjectInputStream in;
 		try {
+			System.out.println("The process is Migrating..");
 			in = new ObjectInputStream(client.getInputStream());
 			MigratableProcess process = (MigratableProcess) in.readObject();
+			System.out.println("The Migrated process has started!");
 			manager.startProcess(process);
 			in.close();
 			client.close();

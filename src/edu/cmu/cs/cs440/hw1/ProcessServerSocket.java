@@ -47,6 +47,7 @@ public class ProcessServerSocket implements Runnable {
 		
 	}
 
+    /** Keeps listening for new socket connections */
 	@Override
 	public void run() {
 		while (isAlive == 1) {

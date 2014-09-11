@@ -19,6 +19,10 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 		isMigrated = false;
 	}
 
+	/**
+	 * Reads in a file, if it has been opened for the first time or
+	 * has been migrated it seeks to the proper place.
+	 */
 	@Override
 	public int read() throws IOException {
 		if(raf == null || isMigrated == true)
@@ -31,6 +35,7 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 		return bytes;
 	}
 	
+	/** Closes the input stream */
 	public void close() throws IOException
 	{
 	  super.close();
@@ -38,6 +43,7 @@ public class TransactionalFileInputStream extends java.io.InputStream implements
 		  raf.close();
 	}
 	
+	/** Sets if the file has been migrated */
 	public void setMigrated(boolean flag)
 	{
 		isMigrated = flag;

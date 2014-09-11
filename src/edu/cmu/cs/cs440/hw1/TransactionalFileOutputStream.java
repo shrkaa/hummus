@@ -12,13 +12,20 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 	private RandomAccessFile raf;
 	private boolean isMigrated;
 	
-	// GREP had a false argument in constructor???
+    /**
+     * Constrctor that creates a TransactionalFileOutputStream
+     * given the output file.
+     * @param file - file to write output into
+     */
 	public TransactionalFileOutputStream(String file) {
 		filename = file;
 		seekTo = 0;
 		isMigrated = false;
 	}
 
+	/** 
+	 * Writes into a given file and seeks to the correct place when appropraite
+	 */
 	@Override
 	public void write(int arg) throws IOException {
 		if(raf == null || isMigrated)
@@ -27,8 +34,10 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 			raf.seek(seekTo);
 		}
 		raf.write(arg);
+		seekTo = seekTo + 1;
 	}
 
+	/** Closes the OutPutStream */
 	public void close() throws IOException
 	{
 	  super.close();
@@ -36,6 +45,7 @@ public class TransactionalFileOutputStream extends java.io.OutputStream
 		  raf.close();
 	}
 	
+	/** Indicated if the file has been migrated */
 	public void setMigrated(boolean flag)
 	{
 		isMigrated = flag;

@@ -89,6 +89,8 @@ public class ReplaceString extends MigratableProcess {
 			setDone(true);
 			in.close();
 			out.close();
+			inFile.close();
+			outFile.close();
 		} catch (EOFException e) {
 			// Put something in here
 		} catch (IOException e) {
